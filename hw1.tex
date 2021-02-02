@@ -1,0 +1,159 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Do not alter this block of commands.  If you're proficient at LaTeX, you may include additional packages, create macros, etc. immediately below this block of commands, but make sure to NOT alter the header, margin, and comment settings here. 
+\documentclass[12 pt]{article}
+\usepackage[margin=1in, top=1.25in, bottom=1.25in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts, enumitem, fancyhdr, color, comment, graphicx, environ, bm, tikz}
+\usepackage{multicol}
+\usepackage[mathscr]{euscript}
+\pagestyle{fancy}
+\setlength{\headheight}{25pt}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{sol}
+    {\emph{Solution:}
+    }
+    {
+    \qed
+    }
+\specialcomment{com}{ \color{blue} \textbf{Comment:} }{\color{black}} %for instructor comments while grading
+
+\newtheorem*{thm}{Theorem}
+\newtheorem*{corollary}{Corollary}
+\newtheorem*{proposition}{Proposition}
+\newtheorem*{lemma}{Lemma}
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+
+\NewEnviron{probscore}{\marginpar{ \color{blue} \tiny Problem Score: \BODY \color{black} }}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\newenvironment{amatrix}[1]{%
+  \left[\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right] 
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Fill in the appropriate information below
+\fancyhf{}
+\lhead{Justin Baum}  %replace with your name
+\rhead{Math 546 \\ Spring 2021 \\ Homework 1} %replace XYZ with the homework course number, semester (e.g. ``Spring 2019"), and assignment number.
+\lfoot{\thepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% The following are definitions for shortcuts for pieces of notation that I use a lot.
+\newcommand{\N}{\mathbb{N}} % the natural numbers
+\newcommand{\Z}{\mathbb{Z}} % the integers
+\newcommand{\C}{\mathbb{C}} % the complex numbers 
+\newcommand{\R}{\mathbb{R}} % the real numbers
+\newcommand{\Q}{\mathbb{Q}} % the rational numbers
+\newcommand{\F}{\mathbb{F}} % the Field
+\renewcommand{\a}{\alpha}
+\newcommand{\lin}[1]{\mathscr{L}(#1)}
+\newcommand{\lgr}{\lambda}
+\newcommand{\vo}[2]{\mathbf{#1
+\ifx&#2&%
+\else
+   % #1 is nonempty
+_#2
+\fi
+}}
+\newcommand{\vv}[1]{\vo{v}{#1}}
+\newcommand{\vu}[1]{\vo{u}{#1}}
+\newcommand{\vb}[1]{\vo{b}{#1}}
+\newcommand{\ve}[1]{\vo{e}{#1}}
+\newcommand{\vw}[1]{\vo{w}{#1}}
+\newcommand{\vz}{\vo{0}{}}
+\newcommand{\poly}[2]{\mathscr{P}_#2(#1)}
+\newcommand{\s}[1]{\mathscr{#1}}
+\newcommand{\zero}{\textbf 0}
+\newcommand{\ddx}{\frac{d}{dx}}
+\newcommand{\lb}{\left <}
+\newcommand{\rb}{\right >}
+\newcommand{\ip}[1]{\lb #1 \rb}
+
+\newcommand*\conj[1]{\overline{#1}}
+\newcommand*\mean[1]{\ocvline{#1}}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\range}{range}
+\DeclareMathOperator{\nul}{null}
+\DeclareMathOperator{\img}{img}
+\DeclareMathOperator{\rref}{rref}
+\DeclareMathOperator{\dego}{deg_{\rightarrow}}
+\DeclareMathOperator{\degi}{deg_{\leftarrow}}
+
+\usepackage{wrapfig}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Do not alter this block.
+\begin{document}
+\begin{problem}{1a}
+Prove that if $a \equiv 1 \pmod n$ or $a \equiv -1 \pmod n$, then $a^2 \equiv 1 \pmod n$.
+\end{problem}
+\begin{sol}
+Given $a \equiv 1 \pmod n$, then there exists an integer $k$, $a = kn + 1$. Then $a^2 = k^2n + 2kn + 1 = (k^2+2k)n + 1$, thus $a^2\equiv 1 \pmod n$.\\Similarly $a \equiv -1\pmod n$, then $a = kn - 1$. Thus $a^2 = k^2n-2kn+1 = (k^2 - 2k)n + 1$ and $a^2 \equiv 1 \pmod n$. 
+\end{sol}
+\begin{problem}{1b}
+Give an example to show that the converse of the statement from
+part a. is not always true.
+\end{problem}
+\begin{sol}
+$2^2 \equiv 1 \pmod 3$ but $2 \not\equiv 1 \pmod 3$.
+\end{sol}
+
+\begin{problem}{2a}
+Prove that if $2x \equiv 2y \pmod5$, then $x\equiv y \pmod 5$.
+\end{problem}
+\begin{sol}
+Assume $x\not\equiv y \pmod 5$. Then $x = 5n + a$ and $y = 5m + b$, where $a,b,n,m\in \Z$, $a\not=b$, and $0 \leq a,b < 5$.
+\[2x = (2)5n + 2a \text{ and } 2y = (2)5m + 2b\]
+We saw in class that $2[x]_5 \neq 2[y]_5$ because $\gcd(2,5) = 1$. Thus $2x \not\equiv 2y \pmod 5$. 
+
+\end{sol}
+\begin{problem}{2b}Give an example of integers x, y such that $2x \equiv 2y \pmod{26}$, but
+$x \not\equiv y \pmod 26$.
+\end{problem}
+\begin{sol}
+$x = 13$, $y=0$, $2(13) \equiv 2(0) \pmod {26}$, but $13 \not \equiv 0 \pmod{26}$.
+\end{sol}
+
+\begin{problem}{3}
+Which of the following classes have a multiplicative inverse? If
+the multiplicative inverse exists, find it. If it does not exist, explain
+why it does not exist.
+\begin{enumerate}
+    \item $[2]_5$
+    \begin{sol}
+    $2^{-1} \equiv 3 \pmod 5$. \[3(5k + 2) \equiv (3)5k + 6 \equiv (3)5k + 5 + 1 \equiv 5(3k + 1) + 1 \pmod 5\]
+    \end{sol}
+    \item $[4]_6$
+    \begin{sol}
+    Assume there was a multiplicative inverse, $x$. $4x \equiv 1 \pmod 6$. However $4x \pmod 6$ is always even, thus there does not exist a multiplicative inverse.\\
+    We can also check by exhaustion.
+    \begin{multicols}{3}
+    \begin{itemize}
+        \item $0(4) = 0 \pmod{6}$
+        \item $1(4) = 4 \pmod{6}$
+        \item $2(4) = 2 \pmod{6}$
+        \item $3(4) = 0 \pmod{6}$
+        \item $4(4) = 4 \pmod{6}$
+        \item $5(4) = 2 \pmod{6}$
+    \end{itemize}
+    \end{multicols}
+    \end{sol}
+    \item $[7]_{11}$
+    \begin{sol}
+    $7^{-1}\equiv 8 \pmod{11}$.
+    \[8(11k+7) \equiv 8(11k) + 56 \equiv 11(8k + 5) + 1 \pmod{11}\]
+    \end{sol}
+\end{enumerate}
+\end{problem}
+\end{document}

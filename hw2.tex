@@ -1,0 +1,196 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Do not alter this block of commands.  If you're proficient at LaTeX, you may include additional packages, create macros, etc. immediately below this block of commands, but make sure to NOT alter the header, margin, and comment settings here. 
+\documentclass[12 pt]{article}
+\usepackage[margin=1in, top=1.25in, bottom=1.25in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts, enumitem, fancyhdr, color, comment, graphicx, environ, bm, tikz}
+\usepackage{multicol}
+\usepackage[mathscr]{euscript}
+\pagestyle{fancy}
+\setlength{\headheight}{25pt}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{sol}
+    {\emph{Solution:}
+    }
+    {
+    \qed
+    }
+\specialcomment{com}{ \color{blue} \textbf{Comment:} }{\color{black}} %for instructor comments while grading
+
+\newtheorem*{thm}{Theorem}
+\newtheorem*{corollary}{Corollary}
+\newtheorem*{proposition}{Proposition}
+\newtheorem*{lemma}{Lemma}
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+
+\NewEnviron{probscore}{\marginpar{ \color{blue} \tiny Problem Score: \BODY \color{black} }}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\newenvironment{amatrix}[1]{%
+  \left[\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right] 
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Fill in the appropriate information below
+\fancyhf{}
+\lhead{Justin Baum}  %replace with your name
+\rhead{Math 546 \\ Spring 2021 \\ Homework 2} %replace XYZ with the homework course number, semester (e.g. ``Spring 2019"), and assignment number.
+\lfoot{\thepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% The following are definitions for shortcuts for pieces of notation that I use a lot.
+\newcommand{\N}{\mathbb{N}} % the natural numbers
+\newcommand{\Z}{\mathbb{Z}} % the integers
+\newcommand{\C}{\mathbb{C}} % the complex numbers 
+\newcommand{\R}{\mathbb{R}} % the real numbers
+\newcommand{\Q}{\mathbb{Q}} % the rational numbers
+\newcommand{\F}{\mathbb{F}} % the Field
+\renewcommand{\a}{\alpha}
+\newcommand{\lin}[1]{\mathscr{L}(#1)}
+\newcommand{\lgr}{\lambda}
+\newcommand{\vo}[2]{\mathbf{#1
+\ifx&#2&%
+\else
+   % #1 is nonempty
+_#2
+\fi
+}}
+\newcommand{\vv}[1]{\vo{v}{#1}}
+\newcommand{\vu}[1]{\vo{u}{#1}}
+\newcommand{\vb}[1]{\vo{b}{#1}}
+\newcommand{\ve}[1]{\vo{e}{#1}}
+\newcommand{\vw}[1]{\vo{w}{#1}}
+\newcommand{\vz}{\vo{0}{}}
+\newcommand{\poly}[2]{\mathscr{P}_#2(#1)}
+\newcommand{\s}[1]{\mathscr{#1}}
+\newcommand{\zero}{\textbf 0}
+\newcommand{\ddx}{\frac{d}{dx}}
+\newcommand{\lb}{\left <}
+\newcommand{\rb}{\right >}
+\newcommand{\ip}[1]{\lb #1 \rb}
+
+\newcommand*\conj[1]{\overline{#1}}
+\newcommand*\mean[1]{\ocvline{#1}}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\range}{range}
+\DeclareMathOperator{\nul}{null}
+\DeclareMathOperator{\img}{img}
+\DeclareMathOperator{\rref}{rref}
+\DeclareMathOperator{\dego}{deg_{\rightarrow}}
+\DeclareMathOperator{\degi}{deg_{\leftarrow}}
+
+\usepackage{wrapfig}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Do not alter this block.
+\begin{document}
+\begin{problem}{1}
+Consider the operation $a*b = 2a + 5b$ on the set of real numbers.
+\begin{enumerate}[label=\alph*)]
+    \item  Is the operation associative? \begin{sol}\\
+    $(a*b)*c = (2a+5b) * c = 4a + 10b +5c$\\
+    $a*(b*c) = a*(2b+5c) = 2a + 10b + 25c$\\
+    This is not an associative operation.
+    \end{sol}
+    \item  Explain why there is no identity element. \begin{sol}\\
+    Assume there exists a value $I\in \R$ that fulfills for $a\in \R$, $a*I=a$. For $a*I=2a+5I$, we can solve for $I$, and $I=-\frac{a}{5}$. Let $b \in \R$, $b \neq a$, when we plug $I$ in for $b*I=b$, we get $b*I=2b-a$. We are left with the statement, $2b-a=b$, and when reduced, $a=b$, which is a contradiction and there does not exist an identity. 
+    \end{sol}
+    % a*i = i*a = a
+\end{enumerate}
+\end{problem}
+\begin{problem}{2}
+Consider the operation $a*b = a-b$ on the set of integers.
+\begin{enumerate}[label=\alph*)]
+    \item  Is the operation associative? \begin{sol}\\
+    $(a*b)*c=(a-b)-c$\\
+    $a*(b*c)=a-(b-c)=(a - b) + c$\\
+    Thus this is not an associative operation.
+    \end{sol}
+    \item  Explain why there is no identity element. \begin{sol}\\
+    Assume there exists $I$ that fulfills $a*I=a$ for some $a\neq 0$.\\
+    $a*I = a - I = a$, thus $I = 0$.\\
+    When plugged into $I*a=a$, we get $a=-a$. Thus there does not exist an identity.
+    \end{sol}
+\end{enumerate}
+\end{problem}
+
+\begin{problem}{3}
+Let $G$ be the set of all integers that are greater than or equal to
+10. Consider the operation $a*b = \max\{a,b\}$ on the set $G$.
+\begin{enumerate}[label=\alph*)]
+    \item  Is the operation associative? \begin{sol}\\
+    $\max\{a,\max\{b,c\}\} \stackrel{?}{=} \max\{\max\{a,b\},c\}$
+    \begin{enumerate}
+        \item $a\geq b \geq c$\\
+        $\max\{a,\max\{b,c\}\}=\max\{a,b\} = a$\\
+        $\max\{\max\{a,b\},c\} = \max\{a,c\}=a$
+        \item $a\geq c \geq b$\\
+        $\max\{a,\max\{b,c\}\}=\max\{a,c\} = a$\\
+        $\max\{\max\{a,b\},c\} = \max\{a,c\}=a$
+        \item $b\geq a \geq c$\\
+        $\max\{a,\max\{b,c\}\}=\max\{a,b\} = b$\\
+        $\max\{\max\{a,b\},c\} = \max\{b,c\}=b$
+        \item $b\geq c \geq a$\\
+        $\max\{a,\max\{b,c\}\}=\max\{a,b\} = b$\\
+        $\max\{\max\{a,b\},c\} = \max\{b,c\}=b$
+        \item $c\geq a \geq b$\\
+        $\max\{a,\max\{b,c\}\}=\max\{a,c\} = c$\\
+        $\max\{\max\{a,b\},c\} = \max\{a,c\}=c$
+        \item $c\geq b \geq a$\\
+        $\max\{a,\max\{b,c\}\}=\max\{a,c\} = c$\\
+        $\max\{\max\{a,b\},c\} = \max\{b,c\}=c$
+    \end{enumerate}
+    Thus this operation is associative.
+    \end{sol}
+    \item  Is there an identity element? If so, find it. \begin{sol}\\
+    Because every element $x \in G$, $x \geq 10$, $\max\{10,x\}=\max\{x,10\}=x$.
+    \end{sol}
+    \item Is the “inverse” requirement satisfied? \begin{sol}\\
+    Assume there exists an inverse. Such that $(a*b)*a^{-1}=b$. Let $a>b$, Then $\max\{\max\{a,b\},a^{-1}\}=\max\{a,a^{-1}\}=c$, where $c\geq a>b$, thus $c>b$. There does not exist an inverse.
+    \end{sol}
+\end{enumerate}
+\end{problem}
+\begin{problem}{4}
+Let $G$ be the set of all the matrices of the form $\begin{bmatrix}a&1\\ 0& b\end{bmatrix}$
+with a, b
+nonzero real numbers, and consider the operation given by multiplication of matrices on the set $G$.
+\begin{enumerate}
+    \item Does the “closure” requirement hold? \begin{sol}\\
+    Let $A = \begin{bmatrix}
+    2 & 1\\0 & 1
+    \end{bmatrix}$, and $B=\begin{bmatrix}
+    1 & 1\\0 & 2
+    \end{bmatrix}$, then $A*B = \begin{bmatrix}
+    2 & 4\\
+    0 & 2
+    \end{bmatrix}
+    $
+    This does not satisfy closure.
+    \end{sol}
+    \item  Explain why there is no identity element.
+    \begin{sol}\\
+    Assume there exists an identity $I$ that satisfies the equality $A*I=A$ and $I*A=A$, where $A=\begin{bmatrix}
+    a&1\\0&b
+    \end{bmatrix}$, let $I=\begin{bmatrix}c&1\\0&d\end{bmatrix}$. Let $B=\begin{bmatrix}a+1 & 1 \\ 0 & b\end{bmatrix}$\\
+    \[A*I=\begin{bmatrix} ac & a + d\\
+    0 & bd\end{bmatrix}\]
+    \[B*I=\begin{bmatrix} (a+1)c & (a+1)+c\\
+    0 & bd\end{bmatrix}\]
+    We have a contradiction $a+1 + c = 1$ and $a + c = 1$, so there does not exist an identity.
+    \end{sol}
+
+\end{enumerate}
+\end{problem}
+
+\end{document}
