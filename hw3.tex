@@ -1,0 +1,313 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Do not alter this block of commands.  If you're proficient at LaTeX, you may include additional packages, create macros, etc. immediately below this block of commands, but make sure to NOT alter the header, margin, and comment settings here. 
+\documentclass[12 pt]{article}
+\usepackage[margin=1in, top=1.25in, bottom=1.25in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts, enumitem, fancyhdr, color, comment, graphicx, environ, bm, tikz}
+\usepackage{multicol}
+\usepackage[mathscr]{euscript}
+\pagestyle{fancy}
+\setlength{\headheight}{25pt}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{sol}
+    {\emph{Solution:}
+    }
+    {
+    \qed
+    }
+\specialcomment{com}{ \color{blue} \textbf{Comment:} }{\color{black}} %for instructor comments while grading
+
+\newtheorem*{thm}{Theorem}
+\newtheorem*{corollary}{Corollary}
+\newtheorem*{proposition}{Proposition}
+\newtheorem*{lemma}{Lemma}
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+
+\NewEnviron{probscore}{\marginpar{ \color{blue} \tiny Problem Score: \BODY \color{black} }}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\newenvironment{amatrix}[1]{%
+  \left[\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right] 
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Fill in the appropriate information below
+\fancyhf{}
+\lhead{Justin Baum}  %replace with your name
+\rhead{Math 546 \\ Spring 2021 \\ Homework 3} %replace XYZ with the homework course number, semester (e.g. ``Spring 2019"), and assignment number.
+\lfoot{\thepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% The following are definitions for shortcuts for pieces of notation that I use a lot.
+\newcommand{\N}{\mathbb{N}} % the natural numbers
+\newcommand{\Z}{\mathbb{Z}} % the integers
+\newcommand{\C}{\mathbb{C}} % the complex numbers 
+\newcommand{\R}{\mathbb{R}} % the real numbers
+\newcommand{\Q}{\mathbb{Q}} % the rational numbers
+\newcommand{\F}{\mathbb{F}} % the Field
+\renewcommand{\a}{\alpha}
+\newcommand{\lin}[1]{\mathscr{L}(#1)}
+\newcommand{\lgr}{\lambda}
+\newcommand{\vo}[2]{\mathbf{#1
+\ifx&#2&%
+\else
+   % #1 is nonempty
+_#2
+\fi
+}}
+\newcommand{\vv}[1]{\vo{v}{#1}}
+\newcommand{\vu}[1]{\vo{u}{#1}}
+\newcommand{\vb}[1]{\vo{b}{#1}}
+\newcommand{\ve}[1]{\vo{e}{#1}}
+\newcommand{\vw}[1]{\vo{w}{#1}}
+\newcommand{\vz}{\vo{0}{}}
+\newcommand{\poly}[2]{\mathscr{P}_#2(#1)}
+\newcommand{\s}[1]{\mathscr{#1}}
+\newcommand{\zero}{\textbf 0}
+\newcommand{\ddx}{\frac{d}{dx}}
+\newcommand{\lb}{\left <}
+\newcommand{\rb}{\right >}
+\newcommand{\ip}[1]{\lb #1 \rb}
+\newcommand{\ver}{\ \vert\ }
+
+\newcommand*\conj[1]{\overline{#1}}
+\newcommand*\mean[1]{\ocvline{#1}}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\range}{range}
+\DeclareMathOperator{\nul}{null}
+\DeclareMathOperator{\img}{img}
+\DeclareMathOperator{\rref}{rref}
+\DeclareMathOperator{\dego}{deg_{\rightarrow}}
+\DeclareMathOperator{\degi}{deg_{\leftarrow}}
+\newcommand{\perm}[2]{\begin{pmatrix}#1\\#2\end{pmatrix}}
+
+
+\usepackage{wrapfig}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Do not alter this block.
+\begin{document}
+\begin{problem}{1}
+Consider the set of quadratic functions,\\
+$S=\{f_{a,b,c}:\R \rightarrow \R \ver f_{a,b,c}=ax^2+bx+c, \text{ with } a,b,c \in \R, b\neq 0 \}$, with composition of functions as the operation.
+\begin{enumerate}[label=\alph*)]
+    \item  Is the closure property satisfied? \begin{sol}\\
+    Let $f = x^2 + x$ then $f \circ f = x^4 + 2x^3+x^2$, which is not in $S$. Thus closure is not satisfied as $f\in S$.
+    \end{sol}
+    \item  Is the identity requirement satisfied? \begin{sol}\\
+    Let $I = x$. And $f = ax^2+bx+c$, with $b\neq 0$.\\
+    $f\circ I = ax^2 + bx + c$. $I\circ f=ax^2+bx+c$.
+    \end{sol}
+    \item Is the inverse requirement satisfied? \begin{sol}\\
+    Assume there exists an inverse. Let $f = x^2 + x + 1$, let $f^{-1} = ax^2 + bx + c$.
+    
+    
+    % a2x4+2abx3+2acx2+b2x2+ax2+2bcx+bx+c2+c+1
+    $f^1\circ f = a^2x^4 + 2abx^3+2acx^2+b^2x^2+ax^2+2bcx+bx+c^2+c+1=x$
+    
+    We get the following system of equations:\\
+    $a^2 = 0$\\
+    $2ab = 0$\\
+    $2ac + b^2 + a = 0$\\
+    $2bc + b= 1$\\
+    $c^2+c+1 = 0$
+    
+    Here $c^2+c+1=0$, would require $c\not\in \R$, which violates that $f^{-1} \in S$. There does not exist an inverse.
+    \end{sol}
+\end{enumerate}
+\end{problem}
+
+\begin{problem}{2}
+\newcommand{\four}[1]{\begin{pmatrix}1&2&3&4\\#1\end{pmatrix}}
+\newcommand{\perm}[2]{\begin{pmatrix}#1\\#2\end{pmatrix}}
+Let $G$ denote the set of all the permutations $\sigma \in S_4$ with $\sigma(2) = 2$.
+\begin{enumerate}[label=\alph*)]
+    \item List all the elements of $G$. \begin{sol}
+    \begin{multicols}{3}
+    \begin{enumerate}[label=\arabic*)]
+            \item \four{
+            1 & 2 & 3 & 4}
+            \item \four{
+            3 & 2 & 1 & 4}
+            \item \four{
+            3 & 2 & 4 & 1}
+            \item \four{
+            1 & 2 & 4 & 3}
+            \item \four{
+            4 & 2 & 1 & 3}
+            \item \four{
+            4 & 2 & 3 & 1
+            }
+    \end{enumerate}
+    \end{multicols}
+    \end{sol}
+    \item Prove that $G$ with composition as the operation is a group.
+    \begin{sol}
+    \begin{enumerate}
+        \item Closure: Let $\sigma = \four{a&2&b&c}$, $\delta = \four{x&2&y&z}$
+        
+        $\sigma \circ \delta = \perm{a&2&b&c}{x&2&y&z}$
+        \item Identity: Let $\sigma = \four{a&2&b&c}$, $I = \four{1&2&3&4}$\\$\sigma \circ I = \four{a&2&b&c} = I \circ \sigma$.
+        \item Inverse: Let $\sigma = \four{a&2&b&c}$, and $\sigma^{-1} = \perm{a&2&b&c}{1&2&3&4}$.\\
+        \begin{multicols}{2}
+        \begin{enumerate}[label=]
+            \item $\sigma \circ \sigma^{-1} = \four{1&2&3&4}$
+            \item $\sigma^{-1} \circ \sigma = \perm{a&2&b&c}{a&2&b&c}$
+        \end{enumerate}
+        \end{multicols}
+        In this case, $\perm{a&2&b&c}{a&2&b&c}$ happens to also be the identity, if $b$ or $c$ happen to be $1$, we can move its column to the front and so on and vice versa to get the literal 1,2,3,4 identity.
+        \item Associative: Let $A,B,C \in G$. Using the bijection definition for permutations, we get for all $x$:
+        
+        $((A\circ B)\circ C)(x) = (A\circ B)(C(x)) = A(B(C(x)))$
+        
+        $(A\circ(B\circ C))(x) = A((B\circ C)(x)) = A(B(C(x)))$
+    \end{enumerate}
+    \end{sol}
+    
+\end{enumerate}
+\end{problem}
+
+\begin{problem}{3}
+\newcommand{\four}[1]{\begin{pmatrix}1&2&3&4\\#1\end{pmatrix}}
+=-==Let $G$ denote the set of all the permutations $\sigma \in S_4$ with $\sigma(2) = 1$.
+\begin{enumerate}[label=\alph*)]
+    \item List all the elements of $G$. \begin{sol}
+    \begin{multicols}{3}
+    \begin{enumerate}[label=\arabic*)]
+            \item \four{
+            2 & 1 & 3 & 4}
+            \item \four{
+            3 & 1 & 2 & 4}
+            \item \four{
+            3 & 1 & 4 & 2}
+            \item \four{
+            2 & 1 & 4 & 3}
+            \item \four{
+            4 & 1 & 2 & 3}
+            \item \four{
+            4 & 1 & 3 & 2
+            }
+    \end{enumerate}
+    \end{multicols}
+    \end{sol}
+    \item Decide whether $G$ is a group with composition as the operation
+or not. Justify the answer.
+    \begin{sol}\\
+    Assume there exists an identity, $A^{-1}= \four{a&1&b&c}$. Let $A=\four{2&1&3&4}$.
+    $A\circ A^{-1} = \four{1&a&b&c}$ which violates closure as $a$ cannot equal 1. There does not exist an identity.
+    \end{sol}
+    
+\end{enumerate}
+\end{problem}
+\begin{problem}{4}
+Let $G = \{1, -1, i, -i\}$ with multiplication of complex numbers as
+the operation and $i=\sqrt{-1}$.
+\begin{enumerate}[label=\alph*)]
+    \item Verify that $G$ is a group. \begin{sol}
+    \begin{enumerate}
+        \item Closure:
+        
+        \begin{center}
+\renewcommand\arraystretch{1.5}
+\setlength\doublerulesep{0pt}
+\begin{tabular}{c||c c c c}
+$\oplus$ & 1 & i & -i & -1 \\
+\hline\hline
+1 & 1 & i & -i & -1 \\ 
+\hline
+i & i & -1 & 1 & -i \\ 
+\hline
+-i & -i & 1 & -1 & i \\ 
+\hline
+-1 & -1 & -i & i & 1 \\ 
+\end{tabular}
+\end{center}
+        \item Identity: This is the same as multiplication, so the identity stands as $1$.
+        \item Inverse: Each has an inverse, $1^{-1} = 1$, $(-1)^{-1}=-1$, $(i)^{-1}=-i$, $(-i)^{-1}=i$.
+        \item Associative: Multiplication over $\C$ is associative.
+    \end{enumerate}
+    \end{sol}
+
+
+\item Show how you can label the elements of $G$ and the elements of
+$Z_4$ as $e, a, b, c$ in such a way that the multiplication table for G is the
+same as the addition table for $Z_4$. \begin{sol}\\
+$G \cong Z_4$ with $f = \perm{1 & i & -1 & -i}{0&1&2&3}$, as $i^0=1$, $i^1=i$, $i^2=-1$, $i^3=-i$, $i^4=1$, and thus multiplication over $G$ is isomorphic to addition over $Z_4$ using the exponent of $i$ for the bijection.
+
+
+The labelling is 
+\begin{multicols}{4}
+\begin{enumerate}
+    \item $1 \leftrightarrow e \leftrightarrow 0$
+    \item $i\leftrightarrow a \leftrightarrow 1$
+    \item $-1 \leftrightarrow b \leftrightarrow 2$
+    \item $-i \leftrightarrow c \leftrightarrow 3$.
+\end{enumerate}
+\end{multicols}
+
+
+\begin{multicols}{3}
+\begin{enumerate}[label=]
+    \item 
+\renewcommand\arraystretch{1.5}
+\setlength\doublerulesep{0pt}
+\begin{tabular}{c||c c c c}
+$\oplus$ & 1 & i & -1 & -i \\
+\hline\hline
+1 & 1 & i & -1& -i\\ 
+\hline
+i & i & -1 & -i & 1 \\ 
+\hline
+-1 & -1 & -i & 1 & i \\ 
+\hline
+-i & -i & 1 & i & -1 \\ 
+\end{tabular}
+    \item 
+\renewcommand\arraystretch{1.5}
+\setlength\doublerulesep{0pt}
+\begin{tabular}{c||c c c c}
+$\oplus$ & e & a & b & c \\
+\hline\hline
+e & e & a & b & c \\ 
+\hline
+a & a & b & c & e \\ 
+\hline
+b & b & c & e & a \\ 
+\hline
+c & c & e & a & b \\ 
+\end{tabular}
+\item \renewcommand\arraystretch{1.5}
+\setlength\doublerulesep{0pt}
+\begin{tabular}{c||c c c c}
+$+$ & 0 & 1 & 2 & 3 \\
+\hline\hline
+0 & 0 & 1 & 2 & 3 \\ 
+\hline
+1 & 1 & 2 & 3 & 0 \\ 
+\hline
+2 & 2 & 3 & 0 & 1 \\ 
+\hline
+3 & 3 & 0 & 1 & 2 \\ 
+\end{tabular}
+\end{enumerate}
+\end{multicols}
+
+
+
+\end{sol}
+\end{enumerate}
+
+\end{problem}
+
+\end{document}
